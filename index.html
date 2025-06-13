@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>flashcards</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin: 20px;
+            background: #f6f4f2;
+        }
+
+        h1 {
+            color: #201e1a;
+        }
+
+        img {
+            max-width: 90%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background: #a29481;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #928574;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>flashcards</h1>
+
+    <div id="card" class="card">
+        <h2 id="question"></h2>
+        <img id="image" src="" alt="Картинка">
+        <p id="answer" style="display:none; font-weight: bold; margin-top: 20px;"></p>
+        <p id="hint" style="display:none; margin-top: 20px; font-style: italic;"></p>
+    </div>
+
+    <button onclick="showAnswer()">Show answer</button>
+    <button onclick="nextCard()">next card</button>
+    <button onclick="showHint()">show explanation</button>
+
+    <script>
+        const cards = [
+            {
+                question: "What is this road sign called? ",
+                image: "https://shorturl.at/0UQTi",
+                answer: "iebraukt aizliegts",
+                hint: "Tā norāda, ka transportlīdzekļiem ir aizliegts iebraukt ceļa posmā, pie kura tā uzstādīta"
+            },
+            {
+                question: "What is this road sign called? ",
+                image: "https://shorturl.at/Hn5KZ",
+                answer: "Braukt aizliegts",
+                hint: "nevienam transportlīdzeklim nedrīkst braukt tālāk pa šo ceļu no tās vietas, kur uzstādīta zīme. Tas attiecas uz visiem"
+            },
+            
+            {
+                question: "What is this road sign called? ",
+                image: "https://upload.wikimedia.org/wikipedia/commons/5/53/Latvia_road_sign_303.svg",
+                answer: "Mehāniskajiem transportlīdzekļiem braukt aizliegts",
+                hint: `Mehāniskie transportlīdzekļi (auto, moto, mopēdi u.c.) nedrīkst braukt tālāk.
+ Atļauts braukt ar velosipēdu, zirgu, pārvietoties kājām.`
+            },
+            
+            {
+                question: "What is this road sign called? ",
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Latvia_road_sign_310.svg",
+                answer: "Platuma ierobežojums",
+                hint: `🚫 Transportlīdzekļi, kas ir platāki par norādīto platumu, nedrīkst braukt tālāk.
+📏 Piemēram, ja uz zīmes rakstīts “2,5 m” – drīkst braukt tikai tie, kas ir šaurāki par 2,5 metriem.`
+            },
+        ];
+
+        let currentIndex = 0;
+
+        function showCard(index) {
+            document.getElementById("question").textContent = cards[index].question;
+            document.getElementById("image").src = cards[index].image;
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("answer").textContent = cards[index].answer;
+            document.getElementById("hint").style.display = "none";
+            document.getElementById("hint").textContent = cards[index].hint;
+        }
+
+        function showAnswer() {
+            document.getElementById("answer").style.display = "block";
+        }
+
+        function showHint() {
+            document.getElementById("hint").style.display = "block";
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % cards.length;
+            showCard(currentIndex);
+        }
+
+        // Инициализация первой карточки
+        showCard(currentIndex);
+    </script>
+
+</body>
+
+</html>
